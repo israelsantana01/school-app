@@ -1,15 +1,43 @@
+<h2>Register students:</h2>
+<br>
+<div class="row">
+    <form [formGroup]="form">
+        <div class="col">
+            <div class="form-group col-6">
+                <label for="name">Name</label>
+                <!-- <input [(ngModel)]="student.name" class="form-control" type="text" id="name"> -->
+                <input type="text" id="name" formControlName="name">
+                <small *ngIf="form.get('name').touched && form.get('name').invalid" style="color: red;">Invalid Field</small>
+            </div>
+            <div class="form-group col-6">
+                <label for="age">Age</label>
+                <!-- <input [(ngModel)]="student.age" class="form-control" type="text" id="age"> -->
+                <input type="text" id="age" formControlName="age">
+                <small *ngIf="form.get('age').touched && form.get('age').invalid" style="color: red;">Invalid Field</small>
+            </div>
+            <div class="form-group col-6">
+                <button class="btn btn-primary" type="button" (click)="register()" [disabled]="form.invalid">Register</button>
+            </div>
+        </div>
+    </form>
+</div>
+
 <h2>Registered Students:</h2>
+<br>
 
 <table>
-    <th>
-        <td>#id</td>
-        <td>Nome</td>
-        <td>Idade</td>
-    </th>
+    <tr>
+        <th>#id</th>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Actions</th>
+    </tr>
 
-    <th>
-        <td>#1</td>
-        <td>Flavio</td>
-        <td>34</td>
-    </th>
+    <tr *ngFor="let student of students; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ student.name }}</td>
+        <td> {{ student.age }} </td>
+        <td> <button (click)="refresh(student.id)" [disabled]="form.invalid">Refresh</button></td>
+        <td><button (click)="delete(student.id)">Delete</button></td>
+    </tr>
 </table>
