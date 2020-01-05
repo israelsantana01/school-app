@@ -13,6 +13,7 @@ export class StudentsComponent implements OnInit {
   students: any[] = [];
   form: FormGroup;
 
+
   constructor(private studentsService: StudentsService) {
   }
 
@@ -27,6 +28,7 @@ export class StudentsComponent implements OnInit {
         validators: [Validators.required]
       })
     });
+
     this.listStudents();
   }
 
@@ -34,8 +36,10 @@ export class StudentsComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
+    const value = this.form.value;
+    value.name = (this.form.get('name').value[0]).toUpperCase() + (this.form.get('name').value.substring(1)).toLowerCase(); 
 
-    this.studentsService.refreshStudent(id, this.form.value).subscribe(() => {
+    this.studentsService.refreshStudent(id, value).subscribe(() => {
       this.form.reset();
       this.listStudents();
     }, err => {
@@ -53,7 +57,10 @@ export class StudentsComponent implements OnInit {
 
   register() {
     if (this.form.valid && (this.form.get('name').value.length > 0)) {
-      this.studentsService.registerStudent(this.form.value).subscribe(res => {
+      const value = this.form.value;
+      value.name = (this.form.get('name').value[0]).toUpperCase() + (this.form.get('name').value.substring(1).toLowerCase());
+      
+      this.studentsService.registerStudent(value).subscribe(res => {
         this.form.reset();
         this.listStudents();
       }, err => {

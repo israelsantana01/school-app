@@ -1,43 +1,63 @@
-<h2>Register students:</h2>
 <br>
 <div class="row">
-    <form [formGroup]="form">
-        <div class="col">
-            <div class="form-group col-6">
-                <label for="name">Name</label>
-                <!-- <input [(ngModel)]="student.name" class="form-control" type="text" id="name"> -->
-                <input type="text" id="name" formControlName="name">
-                <small *ngIf="form.get('name').touched && form.get('name').invalid" style="color: red;">Invalid Field</small>
-            </div>
-            <div class="form-group col-6">
-                <label for="age">Age</label>
-                <!-- <input [(ngModel)]="student.age" class="form-control" type="text" id="age"> -->
-                <input type="text" id="age" formControlName="age">
-                <small *ngIf="form.get('age').touched && form.get('age').invalid" style="color: red;">Invalid Field</small>
-            </div>
-            <div class="form-group col-6">
-                <button class="btn btn-primary" type="button" (click)="register()" [disabled]="form.invalid">Register</button>
-            </div>
-        </div>
-    </form>
+    <div class="col">
+        <h3 class="text">Register students</h3>
+    </div>
 </div>
-
-<h2>Registered Students:</h2>
 <br>
-
-<table>
-    <tr>
-        <th>#id</th>
-        <th>Name</th>
-        <th>Age</th>
-        <th>Actions</th>
-    </tr>
-
-    <tr *ngFor="let student of students; let i = index">
-        <td>{{ i + 1 }}</td>
-        <td>{{ student.name }}</td>
-        <td> {{ student.age }} </td>
-        <td> <button (click)="refresh(student.id)" [disabled]="form.invalid">Refresh</button></td>
-        <td><button (click)="delete(student.id)">Delete</button></td>
-    </tr>
-</table>
+<div class="row">
+    <div class="col">
+        <form [formGroup]="form">
+            <div class="form-group col-12">
+                <label style="color: white;" for="name">Name</label>
+                <!-- <input [(ngModel)]="student.name" class="form-control" type="text" id="name"> -->
+                <input class="form-control" type="text" id="name" formControlName="name">
+                <small *ngIf="form.get('name').touched && form.get('name').invalid" style="color: red;">Invalid
+                    Field</small>
+            </div>
+            <div class="form-group col-12">
+                <label style="color: white;" for="age">Age</label>
+                <!-- <input [(ngModel)]="student.age" class="form-control" type="text" id="age"> -->
+                <input class="form-control" type="text" id="age" formControlName="age">
+                <small *ngIf="form.get('age').touched && form.get('age').invalid" style="color: red;">Invalid
+                    Field</small>
+            </div>
+            <div class="form-group col-12">
+                <button class="btn btn-success btn-block" type="button" (click)="register()"
+                    [disabled]="form.invalid">Register</button>
+            </div>
+        </form>
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col">
+        <h3 class="text">Registered Students</h3>
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col">
+        <table class="table table-striped table-dark">
+            <thead>
+                <tr>
+                    <th scope="col">#id</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Age</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let student of students; let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ student.name }}</td>
+                    <td>{{ student.age }}</td>
+                    <td> <button class="btn btn-primary" (click)="refresh(student.id)"
+                            [disabled]="form.invalid">Change</button>
+                    </td>
+                    <td> <button class="btn btn-danger" (click)="delete(student.id)">Delete</button> </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
